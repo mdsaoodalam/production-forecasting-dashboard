@@ -7,12 +7,12 @@ save_dir = os.path.join("data")
 # Ensure the folder exists
 os.makedirs(save_dir, exist_ok=True)
 
-home, upload_dataset, preprocessing_tab, train_ml_model, prediction_tab = st.tabs([
+home, upload_dataset, data_eng_tab, train_ml_model, prediction_tab = st.tabs([
     "🏠 Home", 
     "📁 Select/Upload Dataset", 
-    "🛠️ Preprocessing", 
+    "🛠️ Data Engineering", 
     "🤖 Train ML Model",
-    "Prediction"
+    "🔮 Prediction"
 ])
 
 with home:
@@ -78,8 +78,8 @@ with upload_dataset:
             )
         
 
-with preprocessing_tab:
-    st.info("Here, you can process the dataset before training your model on it.")
+with data_eng_tab:
+    st.info("Here, you can visualize and process your selected dataset(s) before training your model.")
 
 with train_ml_model:
     st.info(
