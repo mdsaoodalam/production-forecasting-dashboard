@@ -77,7 +77,29 @@ with upload_dataset:
             key="ND_gas_1990_to_present",
             )
         st.checkbox(
-            "North Dakota Historical MCF Gas Produced by County", 
+            "North Dakota Cumulative Oil Production by Formation Through 2020", 
+            help="This dataset presents cumulative oil production in North Dakota by geological formation through December 2020. " \
+            "Each row represents a specific formation, reporting the total oil produced (in barrels), the percentage contribution of " \
+            "that formation to the overall production, and the number of wells associated with it. The dataset covers major formations " \
+            "such as Bakken, Three Forks, Madison, Red River, and others, as well as minor formations, providing a comprehensive overview of " \
+            "North Dakota’s oil production landscape. It is structured to facilitate comparative analysis across formations, evaluation of " \
+            "production contributions, and assessment of well counts relative to output over time.",
+            key="ND_cumulative_formation_2020",
+            )
+        st.checkbox(
+            "North Dakota Historical Monthly Oil Production by County (April 1951 – August 2025, Excluding Confidential Wells)", 
+            help="This dataset provides historical monthly oil production data in North Dakota, " \
+            "broken down by county, excluding confidential wells. " \
+            "The data spans from April 1951 to August 2025. Each row corresponds to a specific month, " \
+            "while each column represents a county, reporting the number of barrels of oil produced during " \
+            "that period. Counties included are Adams, Billings, Bottineau, Bowman, Burke, Divide, Dunn, " \
+            "Golden Valley, Hettinger, McHenry, McKenzie, McLean, Mercer, Mountrail, Renville, Slope, " \
+            "Stark, Ward, and Williams. The dataset is structured to facilitate temporal analysis, " \
+            "county-level comparisons, and trend assessment of oil production across North Dakota over time.",
+            key="ND_historical_barrels_of_oil_produced_by_county",
+            )
+        st.checkbox(
+            "North Dakota Historical MCF Gas Produced by County (January 1990 – August 2025, Excluding Confidential Wells)", 
             help="This dataset provides monthly numerical data for multiple North Dakota counties, " \
             "including Adams, Billings, Bottineau, Bowman, Burke, Divide, Dunn, Golden Valley, Hettinger, " \
             "McHenry, McKenzie, McLean, Mercer, Mountrail, Renville, Slope, Stark, Ward, and Williams, " \
@@ -88,18 +110,7 @@ with upload_dataset:
             "It is structured to facilitate temporal analysis, regional comparisons, and trend observation across counties over time.",
             key="ND_historical_MCF_gas_produced_by_county",
             )
-        st.checkbox(
-            "North Dakota Cumulative Oil Production by Formation Through 2020", 
-            help="This dataset presents cumulative oil production in North Dakota by geological formation through December 2020. " \
-            "Each row represents a specific formation, reporting the total oil produced (in barrels), the percentage contribution of " \
-            "that formation to the overall production, and the number of wells associated with it. The dataset covers major formations " \
-            "such as Bakken, Three Forks, Madison, Red River, and others, as well as minor formations, providing a comprehensive overview of " \
-            "North Dakota’s oil production landscape. It is structured to facilitate comparative analysis across formations, evaluation of " \
-            "production contributions, and assessment of well counts relative to output over time.",
-            key="ND_cumulative_formation_2020",
-            )
         
-
 with data_eng_tab:
     st.info("Here, you can visualize and process your selected dataset(s) before training your model.")
 
