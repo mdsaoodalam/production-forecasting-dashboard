@@ -1,6 +1,14 @@
 import os
+import sys
+
 import pandas as pd
 import streamlit as st
+
+from src.chart import scatterplot
+
+
+# Add the project root to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 save_dir = os.path.join("data") 
 
