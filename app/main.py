@@ -74,7 +74,19 @@ with upload_dataset:
             "It includes monthly values for gas produced, sold, and flared, along with " \
             "additional measurements specific to the Bakken formation. Because the data reflects" \
             " actual field-level reporting, it is suitable for analytics, forecasting, and operational studies.",
-            key="nd_dataset",
+            key="ND_gas_1990_to_present",
+            )
+        st.checkbox(
+            "North Dakota Historical MCF Gas Produced by County", 
+            help="This dataset provides monthly numerical data for multiple North Dakota counties, " \
+            "including Adams, Billings, Bottineau, Bowman, Burke, Divide, Dunn, Golden Valley, Hettinger, " \
+            "McHenry, McKenzie, McLean, Mercer, Mountrail, Renville, Slope, Stark, Ward, and Williams, " \
+            "spanning from January 1990 to August 2025. Each row corresponds to a specific month, " \
+            "while each column represents a county, reporting the recorded values for that period. " \
+            "The dataset captures quantitative metrics for each county, which could represent population, " \
+            "production, or another county-level measure. " \
+            "It is structured to facilitate temporal analysis, regional comparisons, and trend observation across counties over time.",
+            key="ND_historical_MCF_gas_produced_by_county",
             )
         
 
