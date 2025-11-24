@@ -135,6 +135,18 @@ with upload_dataset:
         """, unsafe_allow_html=True)
 
 
+def load_default_dataset(name):
+    if name == "North Dakota Natural Gas Production":
+        return pd.read_excel("data/ND_gas_1990_to_present.xlsx")
+    elif name == "North Dakota Cumulative Oil Production by Formation Through 2020":
+        return pd.read_excel("data/ND_cumulative_formation_2020.xlsx")
+    elif name == "North Dakota Historical Monthly Oil Production by County":
+        return pd.read_excel("data/ND_historical_barrels_of_oil_produced_by_county.xlsx")
+    elif name == "North Dakota Historical MCF Gas Produced by County":
+        return pd.read_excel("data/ND_historical_MCF_gas_produced_by_county.xlsx")
+    else:
+        return pd.DataFrame()
+
 
 with data_eng_tab:
     st.info("Here, you can visualize and process your selected dataset before training your model.")
@@ -142,11 +154,18 @@ with data_eng_tab:
     if choice == "I want to upload my dataset." and 'uploaded_dataset' in st.session_state:
         st.write(f"You selected your uploaded dataset: {st.session_state['uploaded_filename']}")
         df_to_use = st.session_state['uploaded_dataset']
+
     elif choice == "I want to select from the real-world datasets.":
         st.write(f"You selected: {selected_dataset}")
-        # df_to_use = load_dataset_function(selected_dataset)
+        df_to_use = load_default_dataset(selected_dataset)
+
     else:
         st.write("No dataset selected yet.")
+        df_to_use = pd.DataFrame() 
+
+    if not df_to_use.empty:
+        st.write("Statistical description of your dataset:")
+        st.dataframe(df_to_use.describe())
 
 
 with train_ml_model:
