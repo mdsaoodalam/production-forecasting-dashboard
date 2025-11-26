@@ -8,17 +8,37 @@ import streamlit as st
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.plots import (
-    scatterplot, lineplot, distplot, histplot, kdeplot, ecdfplot, rugplot,
-    catplot, stripplot, swarmplot, boxplot, violinplot, pointplot, barplot
+    barplot,
+    boxplot,
+    catplot,
+    distplot,
+    ecdfplot,
+    histplot,
+    kdeplot,
+    lineplot,
+    pointplot,
+    rugplot,
+    scatterplot,
+    stripplot,
+    swarmplot,
+    violinplot,
 )
 
 from strings.strings import (
-    WELCOME_MESSAGE, PLATFORM_DESCRIPTION, UPLOAD_INSTRUCTION, WORKFLOW_SUPPORT_MESSAGE,
-    UPLOAD_DATASET_INFO, DESC_NATURAL_GAS_PRODUCTION, DESC_CUMULATIVE_OIL_PRODUCTION_2020, 
-    DESC_MONTHLY_OIL_PRODUCTION_BY_COUNTY, DESC_MCF_GAS_PRODUCTION_BY_COUNTY,
-    NAME_NATURAL_GAS_PRODUCTION, NAME_CUMULATIVE_OIL_PRODUCTION_2020, 
-    NAME_MONTHLY_OIL_PRODUCTION_BY_COUNTY, NAME_MCF_GAS_PRODUCTION_BY_COUNTY
-    )
+    DESC_CUMULATIVE_OIL_PRODUCTION_2020,
+    DESC_MCF_GAS_PRODUCTION_BY_COUNTY,
+    DESC_MONTHLY_OIL_PRODUCTION_BY_COUNTY,
+    DESC_NATURAL_GAS_PRODUCTION,
+    NAME_CUMULATIVE_OIL_PRODUCTION_2020,
+    NAME_MCF_GAS_PRODUCTION_BY_COUNTY,
+    NAME_MONTHLY_OIL_PRODUCTION_BY_COUNTY,
+    NAME_NATURAL_GAS_PRODUCTION,
+    PLATFORM_DESCRIPTION,
+    UPLOAD_DATASET_INFO,
+    UPLOAD_INSTRUCTION,
+    WELCOME_MESSAGE,
+    WORKFLOW_SUPPORT_MESSAGE,
+)
 
 
 save_dir = os.path.join("data") 
