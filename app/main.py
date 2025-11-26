@@ -385,19 +385,23 @@ with data_eng_tab:
 
 with train_ml_model:
     st.info(
-        "Here, you can train machine learning models on the selected dataset, " \
-        "configure the hyperparameters, and monitor the training process to achieve " \
+        "Here, you can train machine learning models on the selected dataset, "
+        "configure the hyperparameters, and monitor the training process to achieve "
         "the best performance."
-        )
+    )
     if not df_to_use.empty:
 
         st.subheader("🌲 Train CART Decision Tree Model")
 
-        # Select target column
-        target_column = st.selectbox("Select target column:", df_to_use.columns)
-
         # Model type classification/regression
         model_type = st.radio("Model Type:", ["classification", "regression"])
+
+        # Select target column
+        if model_type == "regression":
+            numeric_columns = df_to_use.select_dtypes(include="number").columns.tolist()
+            target_column = st.selectbox("Select target column:", numeric_columns)
+        else:
+            target_column = st.selectbox("Select target column:", df_to_use.columns)
 
         # Hyperparameters
         st.markdown("### ⚙ Hyperparameters")
@@ -414,7 +418,35 @@ with train_ml_model:
         # Train button
         if st.button("🚀 Train Decision Tree Model"):
             from src.model import train_cart_decision_tree, save_model
+            import pandas as pd
+            from sklearn.preprocessing import LabelEncoder
 
+            # Prepare features
+            X = df_to_use.drop(columns=[target_column]).copy()
+            y = df_to_use[target_column].copy()
+
+            # Convert non-numeric columns in features
+            for col in X.select_dtypes(include='object').columns:
+                try:
+                    X[col] = pd.to_datetime(X[col], format="%m-%Y").map(lambda x: x.timestamp())
+                except:
+                    le = LabelEncoder()
+                    X[col] = le.fit_transform(X[col])
+
+            # Encode target if classification and non-numeric
+            if model_type == "classification" and y.dtype == "object":
+                le = LabelEncoder()
+                y = le.fit_transform(y)
+
+            # For regression, convert month-year strings to timestamps
+            if model_type == "regression" and y.dtype == "object":
+                try:
+                    y = pd.to_datetime(y, format="%m-%Y").map(lambda x: x.timestamp())
+                except:
+                    st.error("Selected target column is non-numeric. Please choose a numeric column for regression.")
+                    st.stop()
+
+            # Train model
             model, metrics = train_cart_decision_tree(
                 df=df_to_use,
                 target_column=target_column,
@@ -425,12 +457,14 @@ with train_ml_model:
                 criterion=criterion
             )
 
+
             st.success("🎉 Model trained successfully!")
             st.info(f"📈 Performance → {metrics}")
 
             if st.button("💾 Save Model"):
                 path = save_model(model)
                 st.success(f"Model saved to: `{path}`")
+
 
 with prediction_tab:
     st.info("Here, you can predict based on the trained model.")
