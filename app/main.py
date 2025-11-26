@@ -145,7 +145,7 @@ with data_eng_tab:
         st.dataframe(df_to_use.head())
 
         # Master toggle for visualization
-        if st.toggle("Enable Data Visualization"):
+        if st.toggle("📈 Enable Data Visualization"):
             st.markdown("### 🎨 Choose Plot Group")
 
             # Group selector
@@ -268,6 +268,118 @@ with data_eng_tab:
                         y = st.radio("Select Y‑axis column:", df_columns, index=1, key="line_y")
                     st.info(f"Plotting **{y}** vs **{x}**")
                     lineplot(df_to_use, x=x, y=y)
+
+        # Master toggle for 'Data Preprocessing'
+        if st.toggle("🔧 Enable Data Preprocessing"):
+            
+            st.subheader("🧹 Data Preprocessing Tools")
+
+            # ==========================================================
+            # 1) CLEAN MISSING VALUES
+            # ==========================================================
+            with st.expander("🧼 Clean Missing Values"):
+                missing_count = df_to_use.isna().sum().sum()
+                st.write(f"Missing values detected: **{missing_count}**")
+
+                strategy = st.radio(
+                    "Choose strategy:",
+                    ["None", "Drop Rows", "Drop Columns", "Fill with Mean", "Fill with Median", "Fill with Mode", "Fill Custom Value"],
+                    index=0
+                )
+
+                if strategy == "Drop Rows":
+                    df_to_use.dropna(inplace=True)
+                    st.success("✔ Rows with missing values removed.")
+
+                elif strategy == "Drop Columns":
+                    df_to_use.dropna(axis=1, inplace=True)
+                    st.success("✔ Columns containing missing values removed.")
+
+                elif strategy == "Fill with Mean":
+                    df_to_use.fillna(df_to_use.mean(numeric_only=True), inplace=True)
+                    st.success("✔ Missing numerical values filled using column means.")
+
+                elif strategy == "Fill with Median":
+                    df_to_use.fillna(df_to_use.median(numeric_only=True), inplace=True)
+                    st.success("✔ Missing numerical values filled using medians.")
+
+                elif strategy == "Fill with Mode":
+                    df_to_use.fillna(df_to_use.mode().iloc[0], inplace=True)
+                    st.success("✔ Missing values filled using mode.")
+
+                elif strategy == "Fill Custom Value":
+                    custom = st.text_input("Enter value to fill missing cells:")
+                    if custom:
+                        df_to_use.fillna(custom, inplace=True)
+                        st.success(f"✔ Missing values replaced with **{custom}**")
+
+
+            # ==========================================================
+            # 2) REMOVE DUPLICATES
+            # ==========================================================
+            with st.expander("🗃️ Remove Duplicates"):
+                duplicates = df_to_use.duplicated().sum()
+                st.write(f"Duplicate rows detected: **{duplicates}**")
+
+                if st.button("Remove Duplicates Now"):
+                    df_to_use.drop_duplicates(inplace=True)
+                    st.success("✔ Duplicate records removed successfully.")
+
+
+            # ==========================================================
+            # 3) HANDLE OUTLIERS (IQR Method)
+            # ==========================================================
+            with st.expander("🔍 Handle Outliers"):
+                num_cols = df_to_use.select_dtypes(include=["int", "float"]).columns.tolist()
+
+                if len(num_cols) == 0:
+                    st.warning("⚠ No numeric columns available for outlier detection.")
+                else:
+                    col = st.selectbox("Select column to evaluate:", num_cols)
+
+                    if st.button(f"Apply IQR Outlier Filtering on `{col}`"):
+                        Q1 = df_to_use[col].quantile(0.25)
+                        Q3 = df_to_use[col].quantile(0.75)
+                        IQR = Q3 - Q1
+                        lower, upper = Q1 - 1.5 * IQR, Q3 + 1.5 * IQR
+
+                        before = len(df_to_use)
+                        df_to_use = df_to_use[(df_to_use[col] >= lower) & (df_to_use[col] <= upper)]
+                        removed = before - len(df_to_use)
+
+                        st.success(f"✔ Outliers removed from **{col}** | Rows dropped: **{removed}**")
+
+
+            # ==========================================================
+            # 4) DATA NORMALIZATION / SCALING
+            # ==========================================================
+            with st.expander("⚖️ Data Normalization"):
+                scale_method = st.radio(
+                    "Choose scaling method:",
+                    ["None", "Min-Max Scaling (0→1)", "Standard Scaling (Z-score)"]
+                )
+
+                num_cols = df_to_use.select_dtypes(include=["int", "float"]).columns.tolist()
+
+                if scale_method != "None" and len(num_cols) > 0:
+
+                    from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+                    if scale_method == "Min-Max Scaling (0→1)":
+                        scaler = MinMaxScaler()
+                        df_to_use[num_cols] = scaler.fit_transform(df_to_use[num_cols])
+                        st.success("✔ Feature scaling completed (Min-Max).")
+
+                    elif scale_method == "Standard Scaling (Z-score)":
+                        scaler = StandardScaler()
+                        df_to_use[num_cols] = scaler.fit_transform(df_to_use[num_cols])
+                        st.success("✔ Standard normalization applied (mean=0, std=1).")
+
+                elif scale_method != "None":
+                    st.warning("⚠ No numeric features available for scaling.")
+
+            st.success("✨ Preprocessing applied! You may now proceed to model training.")
+
 
 
 with train_ml_model:
