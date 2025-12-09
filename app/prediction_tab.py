@@ -1,7 +1,7 @@
-
 import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+
 
 def run_prediction_tab():
 
@@ -54,8 +54,6 @@ def run_prediction_tab():
 
     df_input = df_pred[trained_features].copy()
 
-    from sklearn.preprocessing import LabelEncoder
-
     for col in df_input.columns:
 
         # Try: datetime → timestamp
@@ -63,7 +61,7 @@ def run_prediction_tab():
             df_input[col] = pd.to_datetime(df_input[col], errors="raise")
             df_input[col] = df_input[col].astype("int64") // 10**9
             continue
-        except:
+        except Exception:
             pass
 
         # Encode non-numeric
@@ -99,7 +97,7 @@ def run_prediction_tab():
                     label="📥 Download Predictions",
                     data=f,
                     file_name="prediction_results.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 )
 
         except Exception as e:

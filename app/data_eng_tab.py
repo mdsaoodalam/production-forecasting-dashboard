@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# ───────────────────────────────
 # Local Imports — Plots
-# ───────────────────────────────
 from src.plots import (
     barplot,
     boxplot,
@@ -37,15 +35,14 @@ def load_default_dataset(name):
 
 def run_data_eng_tab():
     st.info("Here, you can visualize and process your selected dataset before training your model.")
-    
-    selected_dataset = st.session_state.get("selected_dataset", None)
 
+    selected_dataset = st.session_state.get("selected_dataset", None)
     choice = st.session_state.get("upload_choice", None)
 
     # Dataset selection
-    if choice == "I want to upload my dataset." and 'uploaded_dataset' in st.session_state:
+    if choice == "I want to upload my dataset." and "uploaded_dataset" in st.session_state:
         st.success(f"✅ You selected your uploaded dataset: {st.session_state['uploaded_filename']}")
-        df_to_use = st.session_state['uploaded_dataset']
+        df_to_use = st.session_state["uploaded_dataset"]
 
     elif choice == "I want to select from the real-world datasets.":
         st.success(f"🌍 You selected: {selected_dataset}")
@@ -67,7 +64,7 @@ def run_data_eng_tab():
             # Group selector
             plot_group = st.selectbox(
                 "Select a group of plots:",
-                ["Distribution Plots", "Categorical Plots", "Relational Plots"]
+                ["Distribution Plots", "Categorical Plots", "Relational Plots"],
             )
 
             df_columns = df_to_use.columns.tolist()
@@ -105,63 +102,63 @@ def run_data_eng_tab():
                 with st.expander("Cat Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="cat_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="cat_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="cat_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="cat_y")
                     st.info(f"Plotting categorical **{y}** vs **{x}**")
                     catplot(df_to_use, x=x, y=y, kind="box")
 
                 with st.expander("Strip Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="strip_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="strip_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="strip_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="strip_y")
                     st.info(f"Plotting strip **{y}** vs **{x}**")
                     stripplot(df_to_use, x=x, y=y)
 
                 with st.expander("Swarm Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="swarm_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="swarm_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="swarm_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="swarm_y")
                     st.info(f"Plotting swarm **{y}** vs **{x}**")
                     swarmplot(df_to_use, x=x, y=y)
 
                 with st.expander("Box Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="box_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="box_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="box_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="box_y")
                     st.info(f"Plotting box **{y}** vs **{x}**")
                     boxplot(df_to_use, x=x, y=y)
 
                 with st.expander("Violin Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="violin_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="violin_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="violin_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="violin_y")
                     st.info(f"Plotting violin **{y}** vs **{x}**")
                     violinplot(df_to_use, x=x, y=y)
 
                 with st.expander("Point Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="point_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="point_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="point_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="point_y")
                     st.info(f"Plotting point **{y}** vs **{x}**")
                     pointplot(df_to_use, x=x, y=y)
 
                 with st.expander("Bar Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="bar_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="bar_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="bar_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="bar_y")
                     st.info(f"Plotting bar **{y}** vs **{x}**")
                     barplot(df_to_use, x=x, y=y)
 
@@ -170,24 +167,23 @@ def run_data_eng_tab():
                 with st.expander("Scatter Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="scatter_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="scatter_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="scatter_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="scatter_y")
                     st.info(f"Plotting **{y}** vs **{x}**")
                     scatterplot(df_to_use, x=x, y=y)
 
                 with st.expander("Line Plot"):
                     col1, col2 = st.columns(2)
                     with col1:
-                        x = st.radio("Select X‑axis column:", df_columns, index=0, key="line_x")
+                        x = st.radio("Select X-axis column:", df_columns, index=0, key="line_x")
                     with col2:
-                        y = st.radio("Select Y‑axis column:", df_columns, index=1, key="line_y")
+                        y = st.radio("Select Y-axis column:", df_columns, index=1, key="line_y")
                     st.info(f"Plotting **{y}** vs **{x}**")
                     lineplot(df_to_use, x=x, y=y)
 
         # Master toggle for 'Data Preprocessing'
         if st.toggle("🔧 Enable Data Preprocessing"):
-            
             st.subheader("🧹 Data Preprocessing Tools")
 
             # ==========================================================
@@ -199,8 +195,16 @@ def run_data_eng_tab():
 
                 strategy = st.radio(
                     "Choose strategy:",
-                    ["None", "Drop Rows", "Drop Columns", "Fill with Mean", "Fill with Median", "Fill with Mode", "Fill Custom Value"],
-                    index=0
+                    [
+                        "None",
+                        "Drop Rows",
+                        "Drop Columns",
+                        "Fill with Mean",
+                        "Fill with Median",
+                        "Fill with Mode",
+                        "Fill Custom Value",
+                    ],
+                    index=0,
                 )
 
                 if strategy == "Drop Rows":
@@ -229,7 +233,6 @@ def run_data_eng_tab():
                         df_to_use.fillna(custom, inplace=True)
                         st.success(f"✔ Missing values replaced with **{custom}**")
 
-
             # ==========================================================
             # 2) REMOVE DUPLICATES
             # ==========================================================
@@ -240,7 +243,6 @@ def run_data_eng_tab():
                 if st.button("Remove Duplicates Now"):
                     df_to_use.drop_duplicates(inplace=True)
                     st.success("✔ Duplicate records removed successfully.")
-
 
             # ==========================================================
             # 3) HANDLE OUTLIERS (IQR Method)
@@ -265,20 +267,18 @@ def run_data_eng_tab():
 
                         st.success(f"✔ Outliers removed from **{col}** | Rows dropped: **{removed}**")
 
-
             # ==========================================================
             # 4) DATA NORMALIZATION / SCALING
             # ==========================================================
             with st.expander("⚖️ Data Normalization"):
                 scale_method = st.radio(
                     "Choose scaling method:",
-                    ["None", "Min-Max Scaling (0→1)", "Standard Scaling (Z-score)"]
+                    ["None", "Min-Max Scaling (0→1)", "Standard Scaling (Z-score)"],
                 )
 
                 num_cols = df_to_use.select_dtypes(include=["int", "float"]).columns.tolist()
 
                 if scale_method != "None" and len(num_cols) > 0:
-
                     from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
                     if scale_method == "Min-Max Scaling (0→1)":
